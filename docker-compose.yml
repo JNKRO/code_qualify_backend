@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=codequalifydb
+      - POSTGRES_USER=codequalifyuser
+      - POSTGRES_PASSWORD=codequalifypassword
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://codequalifyuser:codequalifypassword@db:5432/codequalifydb
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
