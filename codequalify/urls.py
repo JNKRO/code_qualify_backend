@@ -16,6 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# for REST API
+from django.conf.urls import url, include
+from django.contrib.auth.models import User
+from rest_framework import routers, serializers, viewsets
+
+# sample serializer
+class CodeQualifySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        # fields = ('url', 'username', 'email', 'is_staff')
+
+# sample view set
+class CodeQualifyViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = CodeQualifySerializer
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
