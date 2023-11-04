@@ -9,6 +9,13 @@ updates:
     # Workflow files stored in the default location of `.github/workflows`. (You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.
     directory: "/" # Location of package manifests
     schedule:
-      interval: 'daily'
+      interval: "daily"
     reviewers:
-      - 'k-taro56'
+      - "k-taro56"
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "k-taro56"
