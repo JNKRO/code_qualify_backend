@@ -1,0 +1,34 @@
+name: Lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Install lint dependencies
+      run: |
+        pip install pylint black
+
+    - name: Run Pylint
+      run: |
+        pylint **/*.py
+
+    - name: Run Black
+      run: |
+        black . --include "\.py$"
