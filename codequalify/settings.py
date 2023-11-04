@@ -139,8 +139,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GITHUB_KEY = 'ff4ae5d16e129d48f4b2'
-SOCIAL_AUTH_GITHUB_SECRET = 'f43f691d60f438c2c845131114380a197f5d4f3c'
+SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET')
 
 # 以下の設定はオプションですが、どの情報を要求するかをGitHubに指示します。
 SOCIAL_AUTH_GITHUB_SCOPE = ['user:email']
