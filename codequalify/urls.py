@@ -20,14 +20,15 @@ from django.urls import path
 from django.contrib.auth.models import User
 from rest_framework import serializers, viewsets
 
-# sample serializer
 class CodeQualifySerializer(serializers.HyperlinkedModelSerializer):
+    """sample serializer"""
     class Meta:
+        """meta data"""
         model = User
         # fields = ('url', 'username', 'email', 'is_staff')
 
-# sample view set
 class CodeQualifyViewSet(viewsets.ModelViewSet):
+    """sample view set"""
     queryset = User.objects.all()
     serializer_class = CodeQualifySerializer
 
