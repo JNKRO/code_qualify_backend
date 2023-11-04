@@ -20,18 +20,6 @@ from django.urls import path
 from django.contrib.auth.models import User
 from rest_framework import serializers, viewsets
 
-class CodeQualifySerializer(serializers.HyperlinkedModelSerializer):
-    """sample serializer"""
-    class Meta:
-        """meta data"""
-        model = User
-        # fields = ('url', 'username', 'email', 'is_staff')
-
-class CodeQualifyViewSet(viewsets.ModelViewSet):
-    """sample view set"""
-    queryset = User.objects.all()
-    serializer_class = CodeQualifySerializer
-
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
