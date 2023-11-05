@@ -10,12 +10,6 @@ ENV OPENAI_API_KEY="your_api_key_here"
 
 WORKDIR /code
 
-# gcc not found エラーになったので、 gcc をインストール
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
 COPY requirements.txt /code/
 RUN pip install --no-cache-dir -r requirements.txt
 

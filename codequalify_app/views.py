@@ -1,9 +1,9 @@
 import openai
 import render
-from django.http import JsonResponse
+from django.http                  import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
+from django.conf                  import settings
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -14,19 +14,23 @@ def chat_with_openai(request):
     openai.api_key = settings.OPENAI_API_KEY
 
     # メッセージに対する回答を設定
-    response = openai.Completion.create(
-        engine            = "text-davinci-003", # 使用するエンジンを指定
-        prompt            = user_input,         # 入力されたメッセージ
-        max_tokens        = 150,                # 単語の数
-        top_p             = 1.0,                # 上位10個まで表示
-        frequency_penalty = 0.0                 # 同じ単語を繰り返し使う文章にする際に設定
+    response = openai.ChatCompletion.create(
+        model    = "gpt-4",
+        messages = [
+            {"role": "user", "content": user_input},
+        ],
     )
 
     # 回答をフロント側に送信
-    return render(request, 'codequalify_app/chat.html', context={'response': response.choices[0].text.strip()})
+    return render(
+        request, 
+        'codequalify_app/chat.html', 
+        context = {'response': response.choices[0]["message"]["content"].strip()}
+    )
 
+    # 回答をフロント側に送信
     '''
     return JsonResponse({
-        'response': response.choices[0].text.strip()
+        'response': response.choices[0]["message"]["content"].strip()
     })
     '''
